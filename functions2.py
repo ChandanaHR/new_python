@@ -160,3 +160,131 @@ b = 20
 args = (30, 40)
 kwargs = {'name': 'Rahul', 'city': 'Bangalore'}
 
+3) Return statements
+Multiple Returns
+Python can return multiple values separated by commas.
+Example
+def calculate(a,b):
+    return a+b, a-b
+result = calculate(20,10)
+print(result)
+
+Output
+
+(30,10)
+
+Python actually returns a tuple.
+
+Unpacking
+sum_result, diff_result = calculate(20,10)
+
+print(sum_result)
+print(diff_result)
+
+Output
+
+30
+10
+
+Returning a List
+A function can return a list.
+Example
+def colors():
+    return ["Red","Green","Blue"]
+print(colors())
+Output
+['Red', 'Green', 'Blue']
+
+Returning a Dictionary
+A function can return a dictionary.
+Example
+def student():
+    return {
+        "name":"Rahul",
+        "age":22,
+        "city":"Bangalore"
+    }
+
+print(student())
+
+Output
+
+{'name':'Rahul','age':22,'city':'Bangalore'}
+
+Returning Objects
+A function can return an object created from a class.
+Example
+class Student:
+
+    def __init__(self,name):
+        self.name=name
+
+def create_student():
+    return Student("Rahul")
+
+student = create_student()
+
+print(student.name)
+
+Returning Functions
+In Python, a function can return another function.
+Example
+def outer():
+    def inner():
+        print("Hello Python")
+    return inner
+message = outer()
+message()
+
+Built - in functional programming
+Functional programming is a programming style where functions are used to process data instead of writing long loops.
+Python provides several built-in functions that make code shorter, cleaner, and easier to read.
+
+map()
+What is map()?
+map() applies the same function to every element in a collection (like a list or tuple).
+syntax: map(function, iterable)
+Example 1: Square Every Number
+
+Without map()
+numbers = [1, 2, 3, 4, 5]
+result = []
+for num in numbers:
+    result.append(num * num)
+print(result)
+Output
+[1, 4, 9, 16, 25]
+
+Using map()
+numbers = [1, 2, 3, 4, 5]
+result = map(lambda x: x*x, numbers)
+print(list(result))
+Output
+[1, 4, 9, 16, 25]
+
+Example 2: Convert Names to Uppercase
+names = ["rahul", "john", "chandana"]
+upper = map(str.upper, names)
+print(list(upper))
+
+filter()
+What is filter()?
+filter() keeps only the elements that satisfy a condition.
+Syntax
+filter(function, iterable)
+Example 1: Even Numbers
+numbers = [1,2,3,4,5,6,7,8]
+result = filter(lambda x: x % 2 == 0, numbers)
+print(list(result))
+
+Example 2: Marks Greater Than 50
+marks = [35, 75, 40, 90, 60]
+passed = filter(lambda x: x >= 50, marks)
+print(list(passed))
+
+reduce()
+What is reduce()?
+reduce() combines all elements into one final value.
+It is available in the functools module.
+        from functools import reduce
+Syntax: reduce(function, iterable)
