@@ -288,3 +288,301 @@ reduce() combines all elements into one final value.
 It is available in the functools module.
         from functools import reduce
 Syntax: reduce(function, iterable)
+example1): from functools import reduce
+
+numbers = [1,2,3,4]
+
+result = reduce(lambda a,b: a+b, numbers)
+
+print(result)
+
+example2: from functools import reduce
+
+numbers = [15, 25, 8, 90, 40]
+
+largest = reduce(lambda a,b: a if a>b else b, numbers)
+
+print(largest)
+
+zip()
+What is zip()?
+zip() combines two or more lists element by element.
+ex1: names = ["Rahul", "John", "Anu"]
+marks = [80,90,70]
+result = zip(names, marks)
+print(list(result))
+
+ex2: names = ["A","B","C"]
+marks = [90,80,70]
+cities = ["Delhi","Mumbai","Bangalore"]
+print(list(zip(names, marks, cities)))
+
+enumerate()
+What is enumerate()?
+Adds an index number to each element.
+a Without enumerate()
+fruits = ["Apple","Banana","Orange"]
+for fruit in fruits:
+    print(fruit)
+
+Output
+Apple
+Banana
+Orange
+
+With enumerate()
+fruits = ["Apple","Banana","Orange"]
+for index, fruit in enumerate(fruits):
+    print(index, fruit)
+
+Output
+0 Apple
+1 Banana
+2 Orange
+
+Start Index from 1
+for index, fruit in enumerate(fruits, start=1):
+    print(index, fruit)
+Output
+1 Apple
+2 Banana
+3 Orange
+
+
+any()
+What is any()?
+Returns True if at least one value is True.
+Think of it as "Is anyone successful?"
+
+Example
+numbers = [False, False, True]
+print(any(numbers))
+
+Output
+True
+Because at least one value is True.
+
+
+Another Example
+numbers = [0,0,5]
+print(any(numbers))
+Output
+True
+Because 5 is considered True.
+
+all()
+What is all()?
+Returns True only if every value is True.
+Think of it as "Did everyone pass?"
+Example
+numbers = [True, True, True]
+print(all(numbers))
+
+
+sorted()
+What is sorted()?
+Returns a new sorted list.
+Original list remains unchanged.
+Example
+numbers = [5,2,8,1]
+print(sorted(numbers))
+Output
+[1,2,5,8]
+Descending Order
+print(sorted(numbers, reverse=True))
+Output
+[8,5,2,1]
+Sorting Strings
+names = ["John","Anu","Rahul"]
+print(sorted(names))
+Output
+['Anu', 'John', 'Rahul']
+
+reversed()
+What is reversed()?
+Returns elements in reverse order.
+Example
+numbers = [1,2,3,4]
+print(list(reversed(numbers)))
+Output
+[4,3,2,1]
+Reverse String
+name = "Python"
+print("".join(reversed(name)))
+Output
+nohtyP
+
+Math functions
+abs()
+What is abs()?
+The abs() function returns the absolute (positive) value of a number.
+abs(number)
+
+round()
+What is round()?
+round() rounds a number to the nearest integer or to a specified number of decimal places.
+print(round(4.7))
+Output
+5
+Example 3
+print(round(3.14159, 2))
+
+pow()
+What is pow()?
+pow() calculates the power (exponent) of a number.
+Syntax
+pow(base, exponent)
+Example 1
+print(pow(2, 3))
+Output
+8
+
+divmod()
+What is divmod()?
+divmod() returns both:
+Quotient
+Remainder
+after division.
+Instead of calculating them separately, Python gives both at once.
+Syntax
+divmod(a, b)
+Example 1
+print(divmod(17, 5))
+Output
+(3, 2)
+
+
+sum()
+What is sum()?
+sum() adds all numbers in an iterable (such as a list or tuple).
+
+
+
+Recursion
+Recursion is a programming technique where a function calls itself to solve a problem.
+Instead of using loops (for or while), the function repeats its own execution until a stopping condition is met.
+Components of Recursion
+Every recursive function has two important parts:
+Base Case
+Recursive Case
+Without these, recursion will not work correctly.
+The base case is the stopping condition.
+It tells the function:
+"Stop calling yourself."
+def countdown(n):
+
+    if n == 0:      # Base Case
+        print("Done")
+        return
+
+    print(n)
+    countdown(n-1)
+
+What Happens Without a Base Case?
+def hello():
+    print("Hello")
+    hello()
+
+hello()
+
+Output
+
+Hello
+Hello
+Hello
+Hello
+Hello
+...
+RecursionError
+
+Because there is no condition to stop.
+
+Factorial: def factorial(n):
+
+    if n == 1:             # Base Case
+        return 1
+
+    return n * factorial(n-1)   # Recursive Case
+
+
+print(factorial(5))
+
+Closures
+A closure is a function that remembers the variables of its outer function even after the outer function has finished executing.
+In simple words,
+A closure is an inner function that "remembers" the data of the outer function.
+Normal Function
+def outer():
+    message = "Hello"
+
+    def inner():
+        print(message)
+
+    inner()
+
+outer()
+
+Output
+
+Hello
+
+Here,
+
+outer() creates message
+inner() uses message
+inner() is called before outer() ends
+
+This is NOT a closure because the inner function is not returned.
+
+Closure Example
+def outer():
+
+    message = "Hello Python"
+
+    def inner():
+        print(message)
+
+    return inner
+
+
+greet = outer()
+
+greet()
+
+Output
+
+Hello Python
+Closure with Arguments
+
+Closures become more useful when the outer function accepts arguments.
+
+Example
+
+def multiplier(n):
+
+    def multiply(x):
+        return x * n
+
+    return multiply
+
+
+double = multiplier(2)
+
+print(double(10))
+
+ex2): def greeting(name):
+
+    def message():
+
+        print("Welcome", name)
+
+    return message
+
+
+greet1 = greeting("Rahul")
+
+greet2 = greeting("Chandana")
+
+greet1()
+
+greet2()
