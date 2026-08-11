@@ -1,0 +1,123 @@
+Module
+A module is a single Python file (.py) that contains variables, functions, classes, or executable code.
+Example
+math_operations.py
+def add(a, b):
+    return a + b
+def subtract(a, b):
+    return a - b
+
+main.py
+import math_operations
+print(math_operations.add(5, 3))
+print(math_operations.subtract(10, 4))
+
+You can also import specific functions:
+from math_operations import add
+print(add(2, 3))
+
+
+Package
+A package is a directory that contains multiple related modules. It helps organize large projects.
+Example Directory Structure
+myproject/
+│
+├── main.py
+│
+└── calculator/
+    ├── __init__.py
+    ├── addition.py
+    └── subtraction.py
+  addition.py
+def add(a, b):
+    return a + b
+subtraction.py
+def subtract(a, b):
+    return a - b
+
+main.py
+from calculator.addition import add
+from calculator.subtraction import subtract
+print(add(10, 5))
+print(subtract(10, 5))
+
+Module	Package
+A single .py file	                            A directory containing related modules
+Contains functions, classes, and variables	  Contains multiple modules (and possibly subpackages)
+Easier for small programs	                    Better for organizing larger projects
+Imported using import module_name	             Imported using import package.module
+
+common built in modules
+a) math Module
+The math module provides mathematical functions and constants.
+import math
+a1) math.sqrt()
+Finds the square root.
+import math
+print(math.sqrt(25))
+print(math.sqrt(49))
+a2) math.pow()
+Raises a number to a power.
+print(math.pow(2, 3))
+Output:
+8.0
+a3) math.factorial()
+Calculates factorial.
+print(math.factorial(5))
+  a4) math.ceil()
+Rounds a number upward.
+print(math.ceil(4.2))
+print(math.ceil(4.9))
+  a5) math.floor()
+Rounds a number downward.
+print(math.floor(4.2))
+print(math.floor(4.9))
+  a6) math.fabs()
+Returns absolute value as a float.
+print(math.fabs(-10))
+print(math.fabs(-5.5))
+  a7) math.gcd()
+Finds Greatest Common Divisor.
+print(math.gcd(12, 18))
+  a8) math.lcm()
+Finds Least Common Multiple.
+print(math.lcm(4, 6))
+  a9) math.isqrt()
+Returns the integer square root.
+print(math.isqrt(25))
+print(math.isqrt(26))
+  a10) math.sin()
+print(math.sin(math.pi / 2))
+Output:
+1.0
+a11). math.cos()
+print(math.cos(0))
+Output:
+a12). math.tan()
+print(math.tan(0))
+a13) math.radians()
+Converts degrees → radians.
+print(math.radians(180))
+Output:
+3.141592653589793
+a14). math.degrees()
+Converts radians → degrees.
+print(math.degrees(math.pi))
+Output:
+180.0
+  Constants
+  math.pi
+print(math.pi)
+Approximately:
+3.141592653589793
+23. math.e
+print(math.e)
+24. math.tau
+print(math.tau)
+tau = 2π
+25. math.inf
+Represents infinity.
+print(math.inf)
+26. math.nan
+Represents "Not a Number".
+print(math.nan)
