@@ -121,3 +121,21 @@ print(math.inf)
 26. math.nan
 Represents "Not a Number".
 print(math.nan)
+
+
+Random module
+   import random
+   Generates a random floating-point number between 0.0 and 1.0.
+The range is:
+0.0 <= number < 1.0
+   1. import random
+number = random.random()
+print(number)
+
+import random
+number = random.random()
+print(number)
+
+2. random.randint()
+Purpose
+Generates a random integer between two values, including both values.
