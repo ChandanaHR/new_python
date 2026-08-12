@@ -139,3 +139,80 @@ print(number)
 2. random.randint()
 Purpose
 Generates a random integer between two values, including both values.
+Remove duplicates while preserving order
+import random
+number = random.randint(1, 10)
+print(number)
+
+3. random.randrange()
+      Generates a random number from a range.
+      random.randrange(start, stop, step)
+number = random.randrange(1, 10)
+print(number)
+
+      4. random.uniform()
+      Generates a random floating-point number between two values.
+number = random.uniform(1, 10)
+print(number)
+
+5. random.choice()
+      Selects one random element from a sequence.
+Usually used with:
+Lists
+Tuples
+Strings
+    students = ["Alice", "Bob", "Charlie", "David"]
+student = random.choice(students)
+print(student)
+
+6. random.choices()
+       Selects multiple elements randomly.
+The important point is:
+Duplicates are allowed.
+Syntax:
+random.choices(sequence, k=number)
+       students = ["Alice", "Bob", "Charlie", "David"]
+result = random.choices(students, k=3)
+print(result)
+choices() with weights
+One very useful feature is giving different probabilities.
+colors = ["Red", "Green", "Blue"]
+result = random.choices(
+    colors,
+    weights=[70, 20, 10],
+    k=10
+)
+print(result)
+
+7. random.sample()
+      Selects multiple unique elements.
+Unlike choices():
+Duplicates are NOT allowed.
+      students = ["Alice", "Bob", "Charlie", "David"]
+result = random.sample(students, k=2)
+print(result)
+
+8. random.shuffle()
+Purpose
+Randomly rearranges the elements of a list.
+Example
+numbers = [1, 2, 3, 4, 5]
+random.shuffle(numbers)
+print(numbers)
+       shuffle() modifies the original list
+
+9. random.seed()
+This one is slightly different.
+Normally:
+
+import random
+       random.seed(10)
+print(random.randint(1, 100))
+print(random.randint(1, 100))
+print(random.randint(1, 100))
+can produce different results every time.
+But sometimes we want the same random sequence every time.
+That's where seed() is useful.
+
+Datetime module
+      
