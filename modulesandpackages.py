@@ -215,4 +215,66 @@ But sometimes we want the same random sequence every time.
 That's where seed() is useful.
 
 Datetime module
-      
+      from datetime import date, datetime, time, timedelta
+       date       → Date only
+time       → Time only
+datetime   → Date + Time
+timedelta  → Difference between dates/times
+
+a) date.today()
+Purpose
+Returns the current date.
+from datetime import date
+today = date.today()
+print(today)
+      Getting individual values
+from datetime import date
+today = date.today()
+print("Year:", today.year)
+print("Month:", today.month)
+print("Day:", today.day)
+
+b) date()
+      Creates a specific date.
+Syntax:
+date(year, month, day)
+      from datetime import date
+birthday = date(2000, 5, 20)
+print(birthday)
+
+c) datetime.now()
+Purpose
+Returns the current local date and time.
+from datetime import datetime
+now = datetime.now()
+print(now)
+from datetime import datetime
+now = datetime.now()
+print("Year:", now.year)
+print("Month:", now.month)
+print("Day:", now.day)
+print("Hour:", now.hour)
+print("Minute:", now.minute)
+print("Second:", now.second)
+
+d) datetime.today()
+datetime.today() also returns the current local date and time.
+    from datetime import datetime
+now = datetime.today()
+print(now)
+For normal local-time usage:
+datetime.now()
+is generally preferred because it can also accept a timezone argument, whereas today() cannot.
+
+e) datetime()
+Purpose
+Creates a specific date + time.
+Syntax:
+datetime(year, month, day, hour, minute, second)
+Example
+from datetime import datetime
+meeting = datetime(2026, 8, 20, 10, 30, 0)
+print(meeting)
+
+
+
