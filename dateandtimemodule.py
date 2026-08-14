@@ -259,3 +259,63 @@ new_dt = dt.replace(
     hour=20
 )
 
+What is a Timezone?
+Imagine the whole world has one master clock.
+That master clock is called UTC.
+UTC = 0
+Different places on Earth are ahead of or behind UTC.
+For example:
+
+India       → UTC + 5:30
+Japan       → UTC + 9:00
+UK          → UTC + 0:00  (standard time)
+USA         → several time zones
+UTC = 12:00PM
+India: UTC + 05:30PM
+Countries to the EAST are generally ahead
+A very simple mental model is:
+
+WEST ←──────── UTC ────────→ EAST
+       behind              ahead
+
+For example:
+USA        → generally behind UTC
+UK         → around UTC
+India      → ahead of UTC
+Japan      → further ahead
+So if UTC is:
+12:00 PM
+approximately:
+USA      → morning
+UK       → afternoon
+India    → evening
+Japan    → night
+
+Japan 🇯🇵
+Japan uses:
+JST
+Japan Standard Time
+UTC + 09:00
+If:
+UTC = 10:00 AM
+then:
+Japan = 7:00 PM
+
+Python Example
+
+Python's zoneinfo module is useful for real-world named time zones.
+
+from datetime import datetime
+from zoneinfo import ZoneInfo
+
+
+india = datetime.now(ZoneInfo("Asia/Kolkata"))
+japan = datetime.now(ZoneInfo("Asia/Tokyo"))
+london = datetime.now(ZoneInfo("Europe/London"))
+new_york = datetime.now(ZoneInfo("America/New_York"))
+
+
+print("India:", india)
+print("Japan:", japan)
+print("London:", london)
+print("New York:", new_york)
