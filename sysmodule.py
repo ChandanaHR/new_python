@@ -127,3 +127,128 @@ Output:
 HelloWorld
 You can add the newline yourself:
 sys.stdout.write("Hello\n")
+
+
+i) sys.exit(): Terminates the python program
+import sys
+print("Program started")
+sys.exit()
+print("This will not execute")
+You can provide an exit status:
+sys.exit(0)  # Successful
+sys.exit(1)  # Error
+
+j) sys.modules
+Contains all modules currently loaded by Python.
+import sys
+print(sys.modules)
+You can check whether a module has already been imported:
+import sys
+if "math" in sys.modules:
+    print("math is already loaded")
+else:
+    print("math is not loaded")
+
+k) sys.stderr
+Represents standard error output.
+import sys
+sys.stderr.write("Something went wrong\n")
+Usually:
+stdout → normal output
+stderr → error/warning output
+Example:
+import sys
+print("Normal message")
+sys.stderr.write("Error message\n")
+
+l) sys.getsizeof()
+Returns the memory size of an object in bytes.
+import sys
+x = 100
+print(sys.getsizeof(x))
+Example output:
+28
+Another example:
+import sys
+numbers = [1, 2, 3, 4, 5]
+print(sys.getsizeof(numbers))
+getsizeof() gives the size of the object itself, not necessarily the total memory consumed by objects referenced inside it.
+
+m) sys.getrecursionlimit()
+Returns the maximum recursion depth Python allows.
+import sys
+print(sys.getrecursionlimit())
+Typical output:
+1000
+
+n) sys.setrecursionlimit()
+Changes the recursion limit.
+import sys
+sys.setrecursionlimit(2000)
+print(sys.getrecursionlimit())
+Output:
+2000
+Warning
+Don't increase this unnecessarily. A very high recursion limit can cause a stack overflow or crash.
+
+o) sys.getdefaultencoding()
+Returns Python's default text encoding.
+import sys
+print(sys.getdefaultencoding())
+
+  p) sys.getfilesystemencoding()
+Returns the encoding used by Python for filesystem operations.
+import sys
+print(sys.getfilesystemencoding())
+
+q) sys.getswitchinterval()
+Returns the interpreter's thread switching interval.
+import sys
+print(sys.getswitchinterval())
+Example:
+0.005
+This is related to how often the Python interpreter checks for thread switching.
+
+r) sys.setswitchinterval()
+Changes the thread switching interval.
+import sys
+sys.setswitchinterval(0.01)
+print(sys.getswitchinterval())
+
+s) sys._getframe()
+Returns the current execution frame.
+import sys
+frame = sys._getframe()
+print(frame)
+You can inspect information about the current function:
+import sys
+def test():
+    frame = sys._getframe()
+    print(frame.f_code.co_name)
+test()
+
+t) sys.maxsize
+Returns the largest value a Python int-related platform size commonly uses.
+import sys
+print(sys.maxsize)
+On a typical 64-bit system:
+9223372036854775807
+
+u) sys.hash_info
+Provides information about Python's hash implementation.
+import sys
+print(sys.hash_info)
+You can inspect individual values:
+print(sys.hash_info.width)
+print(sys.hash_info.modulus)
+Useful for advanced work involving Python hashing.
+
+v) sys.implementation
+Provides information about the Python implementation.
+import sys
+print(sys.implementation)
+Example:
+print(sys.implementation.name)
+Output:
+cpython
+Other Python implementations include things such as PyPy.
