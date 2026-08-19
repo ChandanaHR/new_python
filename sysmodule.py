@@ -178,6 +178,26 @@ m) sys.getrecursionlimit()
 Returns the maximum recursion depth Python allows.
 import sys
 print(sys.getrecursionlimit())
+  Why does Python have a recursion limit?
+Consider this function:
+def hello():
+    print("Hello")
+    hello()
+hello()
+There is no stopping condition, so the function keeps calling itself:
+hello()
+   ↓
+hello()
+   ↓
+hello()
+   ↓
+hello()
+   ↓
+...
+
+Eventually Python stops it:
+
+RecursionError: maximum recursion depth exceeded
 Typical output:
 1000
 
@@ -195,6 +215,30 @@ o) sys.getdefaultencoding()
 Returns Python's default text encoding.
 import sys
 print(sys.getdefaultencoding())
+What does utf-8 mean?
+Python represents normal text as Unicode strings (str).
+For example:
+name = "Chandana"
+This is a Python str (Unicode text).
+But computers also need to represent text as bytes when storing or transmitting data.
+String (Unicode)
+      ↓ encode
+    Bytes
+UTF-8 is one encoding that tells Python how characters should be represented as bytes.
+For example:
+text = "Hello"
+data = text.encode("utf-8")
+print(data)
+Output:
+b'Hello'
+And you can convert the bytes back:
+data = b'Hello'
+text = data.decode("utf-8")
+print(text)
+Output:
+Hello
+UTF-8 acts as the translation layer that maps every unique character
+in human language to a specific sequence of bytes so computers can store, transmit, and display text accurately.
 
   p) sys.getfilesystemencoding()
 Returns the encoding used by Python for filesystem operations.
@@ -208,9 +252,32 @@ print(sys.getswitchinterval())
 Example:
 0.005
 This is related to how often the Python interpreter checks for thread switching.
+                                                          What is "switch interval"?
+Suppose you have two threads:
+Thread A 🧵
+Thread B 🧵
+Python needs to decide when to switch between them.
+Conceptually:
+Thread A runs
+     ↓
+~5 milliseconds
+     ↓
+Thread B gets a chance
+     ↓
+~5 milliseconds
+     ↓
+Thread A gets a chance
+     ↓
+...
+
+This time period is called the switch interval.
+So:
+Switch interval = approximate time interval between opportunities for Python to switch between threads.
 
 r) sys.setswitchinterval()
 Changes the thread switching interval.
+approximate amount of time Python allows a thread to run before giving another thread a chance to run.
+
 import sys
 sys.setswitchinterval(0.01)
 print(sys.getswitchinterval())
@@ -226,6 +293,38 @@ def test():
     frame = sys._getframe()
     print(frame.f_code.co_name)
 test()
+What is a "frame"?
+Whenever you call a function, Python creates an execution frame to keep track of things such as:
+Function name
+Local variables
+Global variables
+Arguments
+Current line being executed
+The function that called it
+Think of a frame as a record of what's happening inside a function while it is running.
+frame.f_code.co_name : gives the name of the function associated with the frame.
+frame.f_locals: f_locals gives you the local variables of that frame.
+frame.f_globals: contains the global namespace.
+frame.f_lineno: It tells you the current line number where the frame is executing.
+Getting the whole call stack
+You can follow f_back:
+import sys
+def third():
+    frame = sys._getframe()
+    while frame:
+        print(frame.f_code.co_name)
+        frame = frame.f_back
+def second():
+    third()
+def first():
+    second()
+first()
+You may see something like:
+third
+second
+first
+<module>
+This is essentially walking backward through the call stack.
 
 t) sys.maxsize
 Returns the largest value a Python int-related platform size commonly uses.
