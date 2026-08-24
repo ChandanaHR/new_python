@@ -110,3 +110,164 @@ The child class can access _salary.
 So conventionally:
 name       → Public
 _name      → Internal / subclass use
+
+
+1c3) Private Members — __name
+Two underscores indicate a private-style member.
+Example:
+class BankAccount:
+    def __init__(self):
+        self.__balance = 10000
+Now:
+account = BankAccount()
+print(account.__balance)
+You'll get:
+AttributeError
+Why?
+Because Python performs name mangling.
+..........What is Name Mangling?
+This is an important interview question.
+When Python sees:
+self.__balance
+inside a class, it internally changes the name approximately to:
+self._BankAccount__balance
+So:
+class BankAccount:
+    def __init__(self):
+        self.__balance = 10000
+Internally becomes approximately:
+_BankAccount__balance
+You can technically access it:
+account = BankAccount()
+print(account._BankAccount__balance)
+Output:
+10000
+But you should not do this in normal application code
+
+
+1d) Getter and setters
+Suppose:
+class Employee:
+    def __init__(self):
+        self.__salary = 50000
+We don't want users directly accessing:
+employee.__salary
+So we provide methods.
+Getter
+A getter is used to read data.
+def get_salary(self):
+    return self.__salary
+Setter
+A setter is used to modify data.
+def set_salary(self, salary):
+    if salary > 0:
+        self.__salary = salary
+Complete example:
+class Employee:
+
+    def __init__(self, salary):
+        self.__salary = salary
+
+    def get_salary(self):
+        return self.__salary
+
+    def set_salary(self, salary):
+
+        if salary > 0:
+            self.__salary = salary
+        else:
+            print("Invalid salary")
+
+
+employee = Employee(50000)
+
+print(employee.get_salary())
+
+employee.set_salary(60000)
+
+print(employee.get_salary())
+
+Output:
+
+50000
+60000
+
+Invalid value:
+
+employee.set_salary(-10000)
+
+Output:
+
+Invalid salary
+
+This is controlled access.
+
+1e) Real world example
+class BankAccount:
+
+    def __init__(self, account_holder, balance):
+
+        self.account_holder = account_holder
+        self.__balance = balance
+
+    def deposit(self, amount):
+
+        if amount <= 0:
+            print("Invalid deposit amount")
+            return
+
+        self.__balance += amount
+        print("Amount deposited successfully")
+
+    def withdraw(self, amount):
+
+        if amount <= 0:
+            print("Invalid withdrawal amount")
+
+        elif amount > self.__balance:
+            print("Insufficient balance")
+
+        else:
+            self.__balance -= amount
+            print("Amount withdrawn successfully")
+
+    def get_balance(self):
+
+        return self.__balance
+
+    account = BankAccount("Chandana", 10000)
+print(account.account_holder)
+print(account.get_balance())
+account.deposit(5000)
+account.withdraw(3000)
+print(account.get_balance())
+
+Why not simply use Getter/Setter methods?
+We can write:
+employee.get_salary()
+employee.set_salary(60000)
+But Python gives us a much cleaner approach:
+employee.salary
+while still running getter/setter logic behind the scenes.
+This is where:
+⭐ @property
+comes in.
+
+class Employee:
+    def __init__(self, salary):
+        self.__salary = salary
+    @property
+    def salary(self):
+        return self.__salary
+    @salary.setter
+    def salary(self, salary):
+        if salary > 0:
+            self.__salary = salary
+        else:
+            print("Salary must be positive")
+
+Now:
+employee = Employee(50000)
+print(employee.salary)
+employee.salary = 60000
+print(employee.salary)
