@@ -169,3 +169,148 @@ Imagine:
                    ↓
                WorkingStudent
 With inheritance, we can move common functionality into a parent class.
+
+1c) Constructor Inheritance in Python
+Let's understand this carefully because constructor inheritance can be confusing at first.
+1. First: What is a constructor?
+In Python, __init__() is commonly called the constructor.
+It is automatically executed when we create an object.
+class Student:
+    def __init__(self):
+        print("Student constructor called")
+s1 = Student()
+Output:
+Student constructor called
+When we write:
+s1 = Student()
+Python automatically calls:
+Student.__init__()
+2. What happens when inheritance is used?
+Consider:
+class Person:
+    def __init__(self):
+        print("Person constructor")
+class Student(Person):
+    pass
+s = Student()
+Output:
+Person constructor
+But notice:
+class Student(Person):
+    pass
+Student doesn't have its own __init__().
+So what happens?
+Python looks for a constructor in Student.
+It doesn't find one.
+Then it looks in the parent class:
+Student
+   ↓
+Does Student have __init__()? ❌
+   ↓
+Look in Person
+   ↓
+Person has __init__()? ✅
+   ↓
+Call Person.__init__()
+Therefore:
+Person constructor
+is printed.
+Important rule
+If the child class doesn't define its own __init__(), the parent's __init__() can be used.
+ex2) class Person:
+    def __init__(self, name):
+        self.name = name
+    def display_name(self):
+        print("Name:", self.name)
+class Student(Person):
+    pass
+student = Student("Chandana")
+student.display_name()
+
+What if the child has its own constructor?
+Now consider:
+class Person:
+    def __init__(self, name):
+        self.name = name
+class Student(Person):
+    def __init__(self, roll_no):
+        self.roll_no = roll_no
+student = Student(101)
+
+1d) super() in Python
+super() is mainly used in inheritance to access the parent class's methods and constructor from the child class.
+The easiest way to remember it is:
+super() means "go to the parent class and use its functionality."
+Why do we need super()?
+Consider this example:
+class Person:
+    def __init__(self, name):
+        self.name = name
+    def display(self):
+        print("Name:", self.name)
+class Student(Person):
+    def __init__(self, name, roll_no):
+        self.name = name
+        self.roll_no = roll_no
+    def display_student(self):
+        print("Name:", self.name)
+        print("Roll No:", self.roll_no)
+
+So:
+class Student(Person):
+    def __init__(self, name, roll_no):
+        super().__init__(name)
+        self.roll_no = roll_no
+
+ex2) class Parent:
+    def show(self):
+        print("Parent show method")
+class Child(Parent):
+    def display(self):
+        super().show()
+obj = Child()
+obj.display()
+ex3) super with constructor
+class Person:
+    def __init__(self, name):
+        self.name = name
+        print("Person constructor")
+class Student(Person):
+    def __init__(self, name, roll_no):
+        super().__init__(name)
+        self.roll_no = roll_no
+        print("Student constructor")
+student = Student("Chandana", 101)
+print(student.name)
+print(student.roll_no)
+
+ex4) class Person:
+    def __init__(self, name):
+        self.name = name
+        print("Person constructor")
+class Employee(Person):
+    def __init__(self, name, employee_id):
+        super().__init__(name)
+        self.employee_id = employee_id
+        print("Employee constructor")
+class Developer(Employee):
+    def __init__(self, name, employee_id, language):
+        super().__init__(name, employee_id)
+        self.language = language
+        print("Developer constructor")
+developer = Developer(
+    "Chandana",
+    101,
+    "Python"
+)
+
+1e) isinstance() and issubclass()
+Very important for interviews.
+isinstance()
+Checks whether an object belongs to a class or its subclasses.
+dog = Dog()
+print(isinstance(dog, Dog))
+print(isinstance(dog, Animal))
+issubclass()
+Checks the relationship between classes.
+print(issubclass(Dog, Animal))
