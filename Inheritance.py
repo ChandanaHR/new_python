@@ -314,3 +314,40 @@ print(isinstance(dog, Animal))
 issubclass()
 Checks the relationship between classes.
 print(issubclass(Dog, Animal))
+
+super() vs Direct Parent Class Call
+Without super()
+Employee.work(self)
+With super()
+super().work()
+
+IS-A → Inheritance
+HAS-A → Composition / Association
+
+IS-A Relationship
+An IS-A relationship means one class is a type of another class.
+For example:
+Dog IS-A Animal
+Car IS-A Vehicle
+Developer IS-A Employee
+Student IS-A Person
+IS-A Relationship
+class Animal:
+    def eat(self):
+        print("Animal is eating")
+class Dog(Animal):
+    def bark(self):
+        print("Dog is barking")
+dog = Dog()
+dog.eat()
+dog.bark()
+
+HAS-A Relationship
+A HAS-A relationship means one object/class contains or uses another object.
+For example:
+Car HAS-A Engine
+House HAS-A Room
+Computer HAS-A Keyboard
+University HAS-A Students
+The important question is:
+Does one object have/use another object?
