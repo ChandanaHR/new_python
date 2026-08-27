@@ -353,3 +353,54 @@ The important question is:
 Does one object have/use another object?
 
 
+Association means:
+Two objects are related to or interact with each other, but neither object necessarily owns the other.
+In simple words:
+"They know/use each other."
+Real-world example
+A:
+Teacher
+and:
+Student
+have a relationship.
+class Student:
+    def study(self):
+        print("Student is studying")
+class Teacher:
+    def teach(self, student):
+        print("Teacher is teaching")
+        student.study()
+student = Student()
+teacher = Teacher()
+teacher.teach(student)
+Another Association Example
+Consider:
+Doctor ───── Patient
+A doctor treats a patient.
+But:
+Doctor can exist without a particular patient.
+Patient can exist without a particular doctor.
+The doctor doesn't own the patient's lifecycle.
+
+Composition is a strong HAS-A relationship.
+It means:
+One object strongly owns another object, and the contained object's lifecycle is tied to the owner.
+The easiest real-world example is:
+Car HAS-A Engine
+When we design the Car to create and own its Engine:
+Car
+ |
+ └── Engine
+The Engine is a component of that particular Car.
+
+class Engine:
+    def start(self):
+        print("Engine started")
+class Car:
+    def __init__(self):
+        self.engine = Engine()
+    def start(self):
+        self.engine.start()
+        print("Car started")
+car = Car()
+car.start()
